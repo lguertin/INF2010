@@ -36,8 +36,7 @@ public class ColorPixel extends AbstractPixel
 	 */
 	public BWPixel toBWPixel()
 	{
-		// compléter
-		
+		return (new BWPixel((rgb[0]+rgb[1]+rgb[2])/3 > 127 ? true : false));
 	}
 	
 	/**
@@ -45,8 +44,7 @@ public class ColorPixel extends AbstractPixel
 	 */
 	public GrayPixel toGrayPixel()
 	{
-		// compléter
-		
+		return (new GrayPixel((rgb[0]+rgb[1]+rgb[2])/3));	
 	}
 	
 	/**
@@ -54,14 +52,13 @@ public class ColorPixel extends AbstractPixel
 	 */
 	public ColorPixel toColorPixel()
 	{
-		// compléter
-		
+		return (new ColorPixel(this.rgb));
 	}
 	
 	public TransparentPixel toTransparentPixel()
 	{
-		// compléter
-		
+		int[] rgba = new int[] {rgb[0], rgb[1], rgb[2], 255};
+		return (new TransparentPixel(rgba));
 	}
 	
 	/**
@@ -69,8 +66,8 @@ public class ColorPixel extends AbstractPixel
 	 */
 	public AbstractPixel Negative()
 	{
-		// compléter
-		
+		int[] rgb = new int[] {255-this.rgb[0], 255-this.rgb[1], 255-this.rgb[2]};
+		return (new ColorPixel(rgb));
 	}
 	
 	public void setAlpha(int alpha)
