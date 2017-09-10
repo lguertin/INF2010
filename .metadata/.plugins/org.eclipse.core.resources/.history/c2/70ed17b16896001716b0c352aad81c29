@@ -36,7 +36,7 @@ public class Main
 		 * Exercice 2
 		 */
 		
-		/*PixelMapPlus pmp = new PixelMapPlus("./src/ed.ppm");
+		PixelMapPlus pmp = new PixelMapPlus("./src/ed.ppm");
 
 		PixelMapPlus hpmp = new PixelMapPlus( pmp );
 		hpmp.zoomIn(0, 0, 2);
@@ -81,6 +81,6 @@ public class Main
 		
 		wName = "Edsger Dijkstra";
 		new DisplayImageWindow(wName, pmp);
-*/
+
 	}
 }

@@ -35,7 +35,7 @@ public class TransparentPixel extends AbstractPixel
 	 */
 	public BWPixel toBWPixel()
 	{
-		return (new BWPixel((rgba[0]+rgba[1]+rgba[2])/3 > 127 ? true : false));
+		return (new BWPixel((rgb[0]+rgb[1]+rgb[2])/3 > 127 ? true : false));
 		
 	}
 	
@@ -64,8 +64,7 @@ public class TransparentPixel extends AbstractPixel
 	 */
 	public TransparentPixel Negative()
 	{
-		int[] rgba = new int[] {255-this.rgba[0], 255-this.rgba[1], 255-this.rgba[2],this.rgba[3]};
-		return (new TransparentPixel(rgba));
+		// compléter
 		
 	}
 	
