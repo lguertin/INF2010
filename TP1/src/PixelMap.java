@@ -114,7 +114,7 @@ public class PixelMap
 		height = h; 
 		width = w;
 		
-		// compl�ter
+		imageData = new AbstractPixel[h][w];
 		
 		
 	}
@@ -124,7 +124,7 @@ public class PixelMap
 	 */
 	public void clearData()
 	{
-		// compl�ter
+		imageData = null;
 		
 	}
 	

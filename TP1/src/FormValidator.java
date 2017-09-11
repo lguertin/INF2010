@@ -130,7 +130,7 @@ public class FormValidator
 		
 		Random generator = new Random( System.nanoTime() );
 		
-		for(int i = 0 ; i < 10; i++)
+		for(int i = 0 ; i < length; i++)
 			charKey[i] = (char) ('A' + generator.nextInt(26));
 		
 		return charKey.toString();
@@ -148,7 +148,7 @@ public class FormValidator
 		
 		Random generator = new Random( System.nanoTime() );
 		
-		for(int i = 0 ; i < 10; i++)
+		for(int i = 0 ; i < nb; i++)
 			charTransform[i] = generator.nextInt(10);
 	
 		return charTransform;
