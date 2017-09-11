@@ -132,17 +132,14 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void resize(int w, int h) throws IllegalArgumentException
 	{
 		if(w < 0 || h < 0)
-			throw new IllegalArgumentException(); 
-		if(w < width || h < height )
-			return; //Msg pr leandre : voir comment gerer le probleme
-		int ratioY = h / height;
-		int ratioX = w / width;
+			throw new IllegalArgumentException();
+		int ratioX = h / height;
+		int ratioY = w / width;
 		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];	
-		for(int j =0 ;j<height;j++)
-			for(int i = 0; i <width ; i++){
+		for(int j =0 ;j<height;j++){
+			for(int i = 0; i <width ; i++)
 				imageDataCopy[j*ratioY][i*ratioX] = imageData[j][i];
-				System.out.println( "W = " +width + " W2=" + w);
-			}
+		}
 	}
 	
 	/**
@@ -229,9 +226,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			}
 		}
 		imageData = imageDataCopy;
-		this.width = newWidth;
-		this.height = newHeight;
-		//System.out.println(x + " " + " " + y + " " + newHeight + " " + " " + newWidth);
+		System.out.println(x + " " + " " + y + " " + newHeight + " " + " " + newWidth);
 	}
 
 	/**
@@ -260,7 +255,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		
 		for(int j =0; j<height ; j++){
 			for(int i = 0;i <width;i++){
-				imageDataCopy[j][i] = imageData[height-j-1][width-i-1];
+				imageDataCopy[j][i] = imageData[height-j][width-i];
 			}
 		}
 		imageData = imageDataCopy;

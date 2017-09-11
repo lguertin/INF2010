@@ -229,8 +229,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			}
 		}
 		imageData = imageDataCopy;
-		this.width = newWidth;
-		this.height = newHeight;
+	//	this.width = newWidth;
+		//this.height = newHeight;
 		//System.out.println(x + " " + " " + y + " " + newHeight + " " + " " + newWidth);
 	}
 

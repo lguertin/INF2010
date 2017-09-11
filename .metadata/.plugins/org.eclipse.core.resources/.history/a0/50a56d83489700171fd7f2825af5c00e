@@ -132,9 +132,9 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void resize(int w, int h) throws IllegalArgumentException
 	{
 		if(w < 0 || h < 0)
-			throw new IllegalArgumentException(); 
+			throw new IllegalArgumentException();
 		if(w < width || h < height )
-			return; //Msg pr leandre : voir comment gerer le probleme
+			return;
 		int ratioY = h / height;
 		int ratioX = w / width;
 		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];	
