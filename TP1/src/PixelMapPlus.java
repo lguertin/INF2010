@@ -56,13 +56,11 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void negate()
 	{
-		for(int j =0; j<height ; j++){
-			for(int i = 0;i <width;i++){
+		for(int j = 0; j < height; j++) {
+			for(int i = 0; i < width; i++) {
 				imageData[j][i].Negative();
 			}
-		}
-			
-		
+		}	
 	}
 	
 	/**
@@ -70,12 +68,11 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void convertToBWImage()
 	{
-		for(int j =0; j<height ; j++){
-			for(int i = 0;i <width;i++){
+		for(int j = 0; j < height; j++) {
+			for(int i = 0; i < width; i++) {
 				imageData[j][i].toBWPixel();
 			}
 		}
-		
 	}
 	
 	/**
@@ -83,8 +80,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void convertToGrayImage()
 	{
-		for(int j =0; j<height ; j++){
-			for(int i = 0;i <width;i++){
+		for(int j = 0; j < height; j++) {
+			for(int i = 0; i < width; i++) {
 				imageData[j][i].toGrayPixel();
 			}
 		}
@@ -95,8 +92,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void convertToColorImage()
 	{
-		for(int j =0; j<height ; j++){
-			for(int i = 0;i <width;i++){
+		for(int j = 0; j < height; j++) {
+			for(int i = 0; i < width; i++) {
 				imageData[j][i].toColorPixel();
 			}
 		}
@@ -104,8 +101,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	
 	public void convertToTransparentImage()
 	{
-		for(int j =0; j<height ; j++){
-			for(int i = 0;i <width;i++){
+		for(int j = 0; j < height; j++){
+			for(int i = 0; i < width; i++){
 				imageData[j][i].toTransparentPixel();
 			}
 		}
@@ -133,16 +130,21 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	{
 		if(w < 0 || h < 0)
 			throw new IllegalArgumentException(); 
-		if(w < width || h < height )
-			return; //Msg pr leandre : voir comment gerer le probleme
-		int ratioY = h / height;
-		int ratioX = w / width;
-		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];	
-		for(int j =0 ;j<height;j++)
-			for(int i = 0; i <width ; i++){
-				imageDataCopy[j*ratioY][i*ratioX] = imageData[j][i];
-				System.out.println( "W = " +width + " W2=" + w);
+		
+		double ratioY = height/h;
+		double ratioX = width/w;
+		
+		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];
+		
+		for(int j = 0 ; j < h; j++) {
+			for(int i = 0; i < w; i++){
+				imageDataCopy[j][i] = imageData[(int)(j*ratioY)][(int)(i*ratioX)];
 			}
+		}
+		
+		imageData = imageDataCopy;
+		this.height = h;
+		this.width = w;
 	}
 	
 	/**
@@ -153,9 +155,9 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		if(row0 < 0 || col0 < 0)
 			throw new IllegalArgumentException();
 		
-		for(int j= col0; j < col0+pm.getHeight();j++){
-			for(int i = row0;i< row0+pm.getWidth();i++){
-				if(j<height && i<width)
+		for(int j = col0; j < col0+pm.getHeight(); j++){
+			for(int i = row0; i < row0+pm.getWidth(); i++){
+				if(j < height && i < width)
 					imageData[j][i] = pm.imageData[j-col0][i-row0];
 			}
 		}		
@@ -170,14 +172,15 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			throw new IllegalArgumentException();
 		
 		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];
-		for(int j= 0; j < h;j++){
-			for(int i =0;i<w;i++){
-				if(j<height && i<width)
+		for(int j = 0; j < h; j++){
+			for(int i = 0 ; i < w; i++){
+				if( j < height && i < width)
 					imageDataCopy[j][i] = imageData[j][i];
 			}
 		}
 		imageData = imageDataCopy;
-		
+		this.height = h;
+		this.width = w;
 	}
 	
 	/**
@@ -223,15 +226,14 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		
 		AbstractPixel[][] imageDataCopy = new AbstractPixel[newHeight][newWidth];
 
-		for(int j=0; j < newHeight; j++){
-			for(int i=0; i < newWidth;i++){
+		for(int j = 0; j < newHeight; j++) {
+			for(int i = 0; i < newWidth; i++) {
 				imageDataCopy[j][i] = imageData[y-newHeight/2 + j][x-newWidth/2 + i];
 			}
 		}
 		imageData = imageDataCopy;
 		this.width = newWidth;
 		this.height = newHeight;
-		//System.out.println(x + " " + " " + y + " " + newHeight + " " + " " + newWidth);
 	}
 
 	/**
@@ -246,7 +248,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			AbstractPixel newPixel) {
 		for(int j =0; j<height ; j++){
 			for(int i = 0;i <width;i++){
-				//System.out.println(j + " " + imageData[j].length);
 				if(imageData[j][i].compareTo(min) != -1 && imageData[j][i].compareTo(max) != 1) {
 					imageData[j][i] = newPixel;
 				}
@@ -258,12 +259,11 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void inverser() {
 		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width];
 		
-		for(int j =0; j<height ; j++){
-			for(int i = 0;i <width;i++){
+		for(int j = 0; j < height; j++){
+			for(int i = 0; i < width; i++){
 				imageDataCopy[j][i] = imageData[height-j-1][width-i-1];
 			}
 		}
-		imageData = imageDataCopy;
-				
+		imageData = imageDataCopy;				
 	}
 }
