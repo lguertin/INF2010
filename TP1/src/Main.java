@@ -33,16 +33,6 @@ public class Main
 		new DisplayImageWindow(wName, pmt, 200, 200);
 		
 		
-		//Enlever si dessous
-		wName = "Edsger Dijkstra Neg";
-		new DisplayImageWindow(wName, pmt, 200, 200);
-		PixelMap pmnnn = pmc.toColorImage();
-		for(int i = 0; i < pmnnn.height; ++i)
-			for(int j = 0; j < pmnnn.width; ++j)
-				pmnnn.getPixel(i, j).Negative();
-		new DisplayImageWindow(wName, pmnnn, 200, 200);
-		/////
-		
 		/**
 		 * Exercice 2
 		 */
@@ -80,18 +70,18 @@ public class Main
 
 
 		PixelMapPlus npmp = new PixelMapPlus( pmp );
-		//npmp.zoomIn(npmp.getWidth(), npmp.getHeight(), 2);
-		//npmp.resize(npmp.width/2, npmp.height/2);
+		npmp.zoomIn(npmp.getWidth(), npmp.getHeight(), 2);
+		npmp.resize(npmp.width/2, npmp.height/2);
 		npmp.negate();
 
-		//pmp.inset(hpmp, 0, 0);
-		//pmp.inset(gpmp, pmp.getHeight()/2, 0);
-		//pmp.inset(bwpmp, 0, pmp.getWidth()/2);
+		pmp.inset(hpmp, 0, 0);
+		pmp.inset(gpmp, pmp.getHeight()/2, 0);
+		pmp.inset(bwpmp, 0, pmp.getWidth()/2);
 		pmp.inset(npmp, pmp.getHeight()/2, pmp.getWidth()/2);
-		//pmp.inverser();
+		pmp.inverser();
 		
 		wName = "Edsger Dijkstra";
-		new DisplayImageWindow(wName, npmp);
-
+		new DisplayImageWindow(wName, pmp);
+	
 	}
 }
