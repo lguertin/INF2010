@@ -133,7 +133,12 @@ public class FormValidator
 		for(int i = 0 ; i < length; i++)
 			charKey[i] = (char) ('A' + generator.nextInt(26));
 		
-		return charKey.toString();
+		String string = "";
+		
+		for(int i = 0; i < length; i++)
+			string += charKey[i];
+		
+		return string;
 	}
 	
 	/**

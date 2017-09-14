@@ -117,8 +117,18 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void rotate(int x, int y, double angleRadian)
 	{
+		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width];
 		
+		for(int j = 0; j < height; j++){
+			for(int i = 0; i < width; i++){
+				int calculX = (int)(Math.cos(angleRadian)*i+Math.sin(angleRadian)*j-Math.cos(angleRadian)*x-Math.sin(angleRadian)*y+x);
+				int calculY = (int)(-Math.sin(angleRadian)*i+Math.cos(angleRadian)*j+Math.sin(angleRadian)*x-Math.cos(angleRadian)*y+y);
+				if(calculX >= 0 && calculX < width && calculY >= 0 && calculY < height)
+					imageDataCopy[j][i] = imageData[calculY][calculX];
+			}
+		}
 		
+		imageData = imageDataCopy;
 	}
 	
 	/**
@@ -194,7 +204,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			for(int i = 0;i< width;i++){
 				int newX = i + rowOffset;
 				int newY = j + colOffset;
-				if(newY<height && newY<width && newY >= 0 && newX >= 0)
+				if(newY<height && newX<width && newY >= 0 && newX >= 0)
 					imageDataCopy[newY][newX] = imageData[j][i];
 			}
 		}	
