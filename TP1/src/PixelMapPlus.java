@@ -1,5 +1,7 @@
 import java.awt.PageAttributes.ColorType;
 
+import PixelMap.ImageType;
+
 /**
  * Classe PixelMapPlus
  * Image de type noir et blanc, tons de gris ou couleurs
@@ -129,6 +131,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		}
 		
 		imageData = imageDataCopy;
+		replaceNullPixels();
 	}
 	
 	/**
@@ -155,6 +158,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		imageData = imageDataCopy;
 		this.height = h;
 		this.width = w;
+		
+		replaceNullPixels();
 	}
 	
 	/**
@@ -191,6 +196,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		imageData = imageDataCopy;
 		this.height = h;
 		this.width = w;
+		
+		replaceNullPixels();
 	}
 	
 	/**
@@ -209,6 +216,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			}
 		}	
 		imageData = imageDataCopy;
+		
+		replaceNullPixels();
 	}
 	
 	/**
@@ -268,14 +277,39 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		
 	}
 
+	/**
+	 * Effectue une inversion de l'image de haut en bas
+	 */
 	public void inverser() {
 		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width];
 		
 		for(int j = 0; j < height; j++){
 			for(int i = 0; i < width; i++){
-				imageDataCopy[j][i] = imageData[height-j-1][i]; //width-i-1
+				imageDataCopy[j][i] = imageData[height-j-1][i];
 			}
 		}
 		imageData = imageDataCopy;				
+	}
+	
+	/**
+	 * Effectue un remplacement de tout les pixels dont la valeur null avec un pixel du meme type d'image
+	 */
+	public void replaceNullPixels() {
+		for(int row=0; row<height; row++)
+		{
+			for(int col=0; col<width; col++)
+			{
+				if(imageData[row][col] == null) {
+					if( imageType == ImageType.BW )
+						imageData[row][col] = new BWPixel();
+					else if( imageType == ImageType.Gray)
+						imageData[row][col] = new GrayPixel();
+					else if( imageType == ImageType.Color )			
+						imageData[row][col] = new ColorPixel();
+					else
+						imageData[row][col] = new TransparentPixel();
+				}
+			}
+		}
 	}
 }
