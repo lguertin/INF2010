@@ -119,12 +119,12 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void rotate(int x, int y, double angleRadian)
 	{
-		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width];
+		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width]; // Creation d'une nouvelle image vide
 		
 		for(int j = 0; j < height; j++){
 			for(int i = 0; i < width; i++){
-				int calculX = (int)(Math.cos(angleRadian)*i+Math.sin(angleRadian)*j-Math.cos(angleRadian)*x-Math.sin(angleRadian)*y+x);
-				int calculY = (int)(-Math.sin(angleRadian)*i+Math.cos(angleRadian)*j+Math.sin(angleRadian)*x-Math.cos(angleRadian)*y+y);
+				int calculX = (int)(Math.cos(angleRadian)*i+Math.sin(angleRadian)*j-Math.cos(angleRadian)*x-Math.sin(angleRadian)*y+x); // Calcul selon la matrice du point x de depart
+				int calculY = (int)(-Math.sin(angleRadian)*i+Math.cos(angleRadian)*j+Math.sin(angleRadian)*x-Math.cos(angleRadian)*y+y); // Calcul selon la matrice du point y de depart
 				if(calculX >= 0 && calculX < width && calculY >= 0 && calculY < height)
 					imageDataCopy[j][i] = imageData[calculY][calculX];
 			}
@@ -144,10 +144,10 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		if(w < 0 || h < 0)
 			throw new IllegalArgumentException(); 
 		
-		double ratioY = height*1.0/h;
-		double ratioX = width*1.0/w;
+		double ratioY = height*1.0/h;	// Calcul du ratio de l'image en Y
+		double ratioX = width*1.0/w; 	// Calcul du ratio de l'image en X
 		
-		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];
+		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];	// Creation d'une nouvelle image vide
 		
 		for(int j = 0 ; j < h; j++) {
 			for(int i = 0; i < w; i++){
@@ -186,7 +186,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		if(w < 0 || h < 0)
 			throw new IllegalArgumentException();
 		
-		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];
+		AbstractPixel[][] imageDataCopy = new AbstractPixel[h][w];	// Creation d'une nouvelle image vide
 		for(int j = 0; j < h; j++){
 			for(int i = 0 ; i < w; i++){
 				if( j < height && i < width)
@@ -205,7 +205,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void translate(int rowOffset, int colOffset)
 	{
-		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width];	
+		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width];	// Creation d'une nouvelle image vide
 		
 		for(int j= 0; j < height;j++){
 			for(int i = 0;i< width;i++){
@@ -231,19 +231,19 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		if(zoomFactor < 1.0)
 			throw new IllegalArgumentException();
 		
-		int newHeight = (int)(height/zoomFactor);
-		int newWidth = (int)(width/zoomFactor);
+		int newHeight = (int)(height/zoomFactor);	// Calcul de la nouvelle taille en Y
+		int newWidth = (int)(width/zoomFactor);		// Calcul de la nouvelle taille en X
 		
-		if(x < newWidth/2)
+		if(x < newWidth/2)			// Deplacement du zoom s'il est trop a gauche de l'image
 			x=newWidth/2;
-		if(x > width-newWidth/2)
+		if(x > width-newWidth/2)	// Deplacement du zoom s'il est trop a droite de l'image
 			x=width-newWidth/2;
-		if(y < newHeight/2)
+		if(y < newHeight/2)			// Deplacement du zoom s'il est trop haut de l'image
 			y=newHeight/2;
-		if(y > height-newHeight/2)
+		if(y > height-newHeight/2)	// Deplacement du zoom s'il est plus bas que l'image
 			y=height-newHeight/2;
 		
-		AbstractPixel[][] imageDataCopy = new AbstractPixel[newHeight][newWidth];
+		AbstractPixel[][] imageDataCopy = new AbstractPixel[newHeight][newWidth]; // Creation d'une nouvelle image vide
 
 		for(int j = 0; j < newHeight; j++) {
 			for(int i = 0; i < newWidth; i++) {
@@ -281,7 +281,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 * Effectue une inversion de l'image de haut en bas
 	 */
 	public void inverser() {
-		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width];
+		AbstractPixel[][] imageDataCopy = new AbstractPixel[height][width];	// Creation d'une nouvelle image vide
 		
 		for(int j = 0; j < height; j++){
 			for(int i = 0; i < width; i++){

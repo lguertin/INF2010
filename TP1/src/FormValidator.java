@@ -131,12 +131,12 @@ public class FormValidator
 		Random generator = new Random( System.nanoTime() );
 		
 		for(int i = 0 ; i < length; i++)
-			charKey[i] = (char) ('A' + generator.nextInt(26));
+			charKey[i] = (char) ('A' + generator.nextInt(26));	// Generation d'une lettre de l'alphabet
 		
 		String string = "";
 		
 		for(int i = 0; i < length; i++)
-			string += charKey[i];
+			string += charKey[i];								// Conversion du tableau de caratere en chaine de caractere
 		
 		return string;
 	}
@@ -154,7 +154,7 @@ public class FormValidator
 		Random generator = new Random( System.nanoTime() );
 		
 		for(int i = 0 ; i < nb; i++)
-			charTransform[i] = generator.nextInt(10);
+			charTransform[i] = generator.nextInt(10);		// Generation d'un nombre de 0 a 9
 	
 		return charTransform;
 	}
