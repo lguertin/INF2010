@@ -1,7 +1,5 @@
 import java.awt.PageAttributes.ColorType;
 
-import PixelMap.ImageType;
-
 /**
  * Classe PixelMapPlus
  * Image de type noir et blanc, tons de gris ou couleurs
@@ -254,7 +252,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		width = newWidth;
 		height = newHeight;
 		
-		this.resize((int)(this.width*zoomFactor), (int)(this.height*zoomFactor));
+		this.resize((int)(this.width*zoomFactor), (int)(this.height*zoomFactor)); //remet l'image aux bonnes dimensions
 	}
 
 	/**
