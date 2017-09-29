@@ -58,7 +58,7 @@ public class DoublyLinkedList<AnyType>
     {
         if(size == 0)
         	return null;
-        //return this.back;
+        return back.getValue();
     }
 
     // Retourne l'element au debut de la liste.
@@ -68,62 +68,112 @@ public class DoublyLinkedList<AnyType>
     {
     	if(size == 0)
         	return null;
-        //return this.front;
+    	return front.getValue();
     }
 
     // Retourne le noeud a  l'indice donne.
     // Complexite asymptotique: O(n)
     private Node<AnyType> getNodeAt(int index)
     {
-        // a€ completer
+        Node<AnyType> temp = front;
+        int i = 0;
+        while(i != index) {
+        	temp = temp.getNext();
+        	i++;
+        }
+        return temp;
     }
 
     // Retourne l'element a  l'indice donne.
     // Complexite asymptotique: O(n)
     public AnyType getAt(int index) throws IndexOutOfBoundsException
     {
-        // a€ completer
+    	Node<AnyType> temp = front;
+        int i = 0;
+        while(i != index) {
+        	temp = temp.getNext();
+        	i++;
+        }
+        return temp.getValue();
     }
 
     // Retire l'element a  la fin de la liste.
     // Complexite asymptotique: O(1)
     public void popBack() throws EmptyListException
     {
-        // a€ completer
+        if(size != 0) {
+        	back.prev.next = null;
+        	back = back.prev;
+        	size--;
+        }
     }
 
     // Retire l'element au debut de la liste.
     // Complexite asymptotique: O(1)
     public void popFront() throws EmptyListException
     {
-        // a€ completer
+    	if(size != 0) {
+        	front.next.prev = null;
+        	front = front.next;
+        	size--;
+        }
     }
 
     // Retire l'element a  l'indice donne.
     // Complexite asymptotique: O(n)
     public void removeAt(int index) throws IndexOutOfBoundsException
     {
-        // a€ completer
+    	Node<AnyType> temp = front;
+        int i = 0;
+        while(i != index) {
+        	temp = temp.next;
+        	i++;
+        }
+        temp.next.prev = temp.prev;
+        temp.prev.next = temp.next;
+        temp.next = temp.prev = null;
+        temp = null;
+        size--;
     }
 
     // Ajoute un element a  la fin de la liste.
     // Complexite asymptotique: O(1)
     public void pushBack(AnyType item)
     {
-        // a€ completer
+        if(size == 0) {
+        	front = new Node<AnyType>(item, null, null);
+        	back = front;
+        }
+        else {
+        	back = new Node<AnyType>(item, back, null);
+        	back.prev.next = back;
+        }
+        size++;
     }
 
     // Ajoute un element au debut de la liste.
     // Complexite asymptotique: O(1)
     public void pushFront(AnyType item)
     {
-        // a€ completer
+    	if(size == 0) {
+        	front = new Node<AnyType>(item, null, null);
+        	back = front;
+        }
+        else {
+        	front = new Node<AnyType>(item, null, front);
+        	front.next.prev = front;
+        }
+    	size++;
     }
 
     // Ajoute un element a  l'indice donne.
     // Complexite asymtotique: O(n)
     public void insertAt(AnyType item, int index) throws IndexOutOfBoundsException
     {
-        // a€ completer
+        Node<AnyType> temp = getNodeAt(index);
+        Node<AnyType> newNode = new Node<AnyType>(item, temp.prev, temp.next);
+        newNode.prev.next = newNode;
+        newNode.next.prev = newNode;
+        size++;
     }
 }
