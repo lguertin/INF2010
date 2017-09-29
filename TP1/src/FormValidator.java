@@ -136,7 +136,7 @@ public class FormValidator
 		String string = "";
 		
 		for(int i = 0; i < length; i++)
-			string += charKey[i];								// Conversion du tableau de caratere en chaine de caractere
+			string += charKey[i];								// Conversion du tableau de caractere en chaine de caractere
 		
 		return string;
 	}

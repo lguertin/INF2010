@@ -55,6 +55,9 @@ public class ColorPixel extends AbstractPixel
 		return (new ColorPixel(this.rgb));
 	}
 	
+	/**
+	 * Renvoie un pixel copie de type transparent
+	 */
 	public TransparentPixel toTransparentPixel()
 	{
 		int[] rgba = new int[] {rgb[0], rgb[1], rgb[2], 255};

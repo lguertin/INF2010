@@ -286,7 +286,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 				imageDataCopy[j][i] = imageData[height-j-1][i];
 			}
 		}
-		imageData = imageDataCopy;				
+		imageData = imageDataCopy;
 	}
 	
 	/**
