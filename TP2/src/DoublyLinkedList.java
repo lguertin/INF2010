@@ -26,12 +26,12 @@ public class DoublyLinkedList<AnyType>
 
         public Node<AnyType> getNext()
         {
-            return next;
+            return this.next;
         }
 
         public AnyType getValue()
         {
-            return value;
+            return this.value;
         }
     }
 
@@ -88,6 +88,9 @@ public class DoublyLinkedList<AnyType>
     // Complexite asymptotique: O(n)
     public AnyType getAt(int index) throws IndexOutOfBoundsException
     {
+    	if(index<0 || index > size)
+    		throw new IndexOutOfBoundsException("L'index non valide");
+    	
     	Node<AnyType> temp = front;
         int i = 0;
         while(i != index) {
@@ -101,7 +104,15 @@ public class DoublyLinkedList<AnyType>
     // Complexite asymptotique: O(1)
     public void popBack() throws EmptyListException
     {
-        if(size != 0) {
+    	if(empty())
+    		throw new EmptyListException("Liste Vide");
+        
+    	else if(size ==1){
+        		size--;
+        		back = null;
+        		front = null;
+        }
+        else{
         	back.prev.next = null;
         	back = back.prev;
         	size--;
@@ -111,18 +122,29 @@ public class DoublyLinkedList<AnyType>
     // Retire l'element au debut de la liste.
     // Complexite asymptotique: O(1)
     public void popFront() throws EmptyListException
-    {
-    	if(size != 0) {
-        	front.next.prev = null;
-        	front = front.next;
+    {	
+    	if(empty())
+    		throw new EmptyListException("Liste vide");
+    	
+    	else if(size ==1){
         	size--;
+        	back = null;
+        	front = null;
         }
+    	else{
+    		front.next.prev = null;
+    		front = front.next;
+    		size--;
+    	}
     }
 
     // Retire l'element a  l'indice donne.
     // Complexite asymptotique: O(n)
     public void removeAt(int index) throws IndexOutOfBoundsException
     {
+    	if(index<0 || index > size)
+    		throw new IndexOutOfBoundsException("L'index non valide");
+    	
     	Node<AnyType> temp = front;
         int i = 0;
         while(i != index) {
@@ -169,11 +191,19 @@ public class DoublyLinkedList<AnyType>
     // Ajoute un element a  l'indice donne.
     // Complexite asymtotique: O(n)
     public void insertAt(AnyType item, int index) throws IndexOutOfBoundsException
-    {
-        Node<AnyType> temp = getNodeAt(index);
-        Node<AnyType> newNode = new Node<AnyType>(item, temp.prev, temp.next);
-        newNode.prev.next = newNode;
-        newNode.next.prev = newNode;
-        size++;
+    {	
+    	if(index<0 || index > size)
+    		throw new IndexOutOfBoundsException("L'index non valide");
+	    if(index==0)
+	    		pushFront(item);
+	    else if (index==size)
+	    		pushBack(item);
+	    else{
+	        Node<AnyType> temp = getNodeAt(index);
+	        Node<AnyType> newNode = new Node<AnyType>(item, temp.prev, temp.next);
+	        newNode.prev.next = newNode;
+	        newNode.next.prev = newNode;
+	        size++;
+	    }
     }
 }
