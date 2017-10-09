@@ -52,11 +52,41 @@ public class PostfixSolverMain
 	 
 	 public static boolean solve(String input) throws ParsingErrorException
      {
-        // À compléter
+        boolean val1;
+        boolean val2;
+        boolean result;
         ArrayStack<Boolean> stack = new ArrayStack<>();
         //L'expression est séparée en tokens selon les espaces.
         for (String token : input.split("\\s")) {
+        	switch(token) {
+        	case "and":
+        		val2 = stack.pop();
+        		val1 = stack.pop();
+        		result = val1 & val2;
+        		stack.push(result);
+        		break;
+        	case "or":
+        		val2 = stack.pop();
+        		val1 = stack.pop();
+        		result = val1 | val2;
+        		stack.push(result);
+        		break;
+        	case "not":
+        		val1 = stack.pop();
+        		result = !val1;
+        		stack.push(result);
+        		break;
+        	case "1":
+        		stack.push(Boolean.TRUE);
+        		break;
+        	case "0":
+        		stack.push(Boolean.FALSE);
+        		break;
+        	default:
+        		break;
+        	}
+        	
         }
-
+        return stack.pop();
     }
 }

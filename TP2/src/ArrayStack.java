@@ -9,16 +9,22 @@ public class ArrayStack<AnyType>
     private AnyType[] table;
 
     // Initialisation de la pile.
-    public ArrayStack()
+    @SuppressWarnings("unchecked")
+	public ArrayStack()
     {
-        // À compléter
+    	table = (AnyType[])new Object[INITIAL_SIZE];
     }
 
     // Enlève l'element au sommet de la pile et le renvoie.
     // Complexité asymptotique: O(1)
     public AnyType pop() throws EmptyStackException
     {
-        // À compléter
+    	if(empty())
+    		throw new EmptyStackException();
+    	
+    	AnyType element = table[size-1];
+    	size--;
+        return element;
     }
 
     // Ajoute un element au sommet de la pile.
@@ -26,7 +32,11 @@ public class ArrayStack<AnyType>
     // Complexité asymptotique: O(1) (O(N) lorsqu'un redimensionnement est nécessaire)
     public void push(AnyType element)
     {
-        // À compléter
+        if(size == table.length)
+        	resize(DEFAULT_RESIZE_FACTOR);
+        
+        table[size] = element;
+        size++;
     }
 
     // Renvoie l'element au sommet de la pile sans l'enlever.
@@ -34,7 +44,10 @@ public class ArrayStack<AnyType>
     // Complexité asymptotique: O(1)
     public AnyType peek()
     {
-        // À compléter
+    	if(empty())
+    		return null;
+    	
+        return table[size-1];
     }
 
     // Renvoie le nombre d'elements dans la pile.
@@ -48,6 +61,12 @@ public class ArrayStack<AnyType>
     @SuppressWarnings("unchecked")
     private void resize(int resizeFactor)
     {
-        // À compléter
+        AnyType[] tableTemp = (AnyType[])new Object[table.length*resizeFactor];
+        
+        for(int i = 0; i < this.size; i++){
+        	tableTemp[i] = table[i];
+        }
+        
+        table = tableTemp;
     }
 }
