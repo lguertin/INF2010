@@ -9,8 +9,7 @@ public class StackQueue<AnyType> implements Queue<AnyType>
 	@SuppressWarnings("unchecked")
 	public StackQueue()
 	{
-        inStack = new Stack<AnyType>();
-        outStack = new Stack<AnyType>();
+        // À compléter
 	}
 	
 	// Indique si la file est vide.
@@ -33,10 +32,6 @@ public class StackQueue<AnyType> implements Queue<AnyType>
        if(empty())
     	   return null;
        else{
-    	   if(outStack.isEmpty()){
-    		   while (!inStack.isEmpty())
-    			   outStack.push(inStack.pop());
-    	   }
     	   return outStack.peek();
        }
 	}
@@ -45,15 +40,10 @@ public class StackQueue<AnyType> implements Queue<AnyType>
 	// Complexité asymptotique: O(1) (ammorti)
 	public void pop() throws EmptyQueueException
 	{
-        if(empty())
+        if(size==0)
         	throw new EmptyQueueException("Liste vide");
         else{
-        	 if(outStack.isEmpty()){
-      		   while (!inStack.isEmpty())
-      			   outStack.push(inStack.pop());
-      	   }
         	 outStack.pop();
-        	 size --;
         }
 	}
 	
@@ -61,8 +51,7 @@ public class StackQueue<AnyType> implements Queue<AnyType>
 	// Complexité asymptotique: O(1)
 	public void push(AnyType item)
 	{
-		inStack.push(item);
-        size++;
+        // À compléter
 	}
 }
 

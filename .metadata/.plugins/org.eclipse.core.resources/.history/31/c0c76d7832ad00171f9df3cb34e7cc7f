@@ -45,15 +45,10 @@ public class StackQueue<AnyType> implements Queue<AnyType>
 	// Complexité asymptotique: O(1) (ammorti)
 	public void pop() throws EmptyQueueException
 	{
-        if(empty())
+        if(size==0)
         	throw new EmptyQueueException("Liste vide");
         else{
-        	 if(outStack.isEmpty()){
-      		   while (!inStack.isEmpty())
-      			   outStack.push(inStack.pop());
-      	   }
         	 outStack.pop();
-        	 size --;
         }
 	}
 	

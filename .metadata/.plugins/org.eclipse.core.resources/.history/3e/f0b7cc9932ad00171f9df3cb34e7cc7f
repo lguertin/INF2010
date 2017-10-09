@@ -48,12 +48,7 @@ public class StackQueue<AnyType> implements Queue<AnyType>
         if(empty())
         	throw new EmptyQueueException("Liste vide");
         else{
-        	 if(outStack.isEmpty()){
-      		   while (!inStack.isEmpty())
-      			   outStack.push(inStack.pop());
-      	   }
         	 outStack.pop();
-        	 size --;
         }
 	}
 	
