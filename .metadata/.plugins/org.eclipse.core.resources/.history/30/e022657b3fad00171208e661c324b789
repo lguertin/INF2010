@@ -51,7 +51,7 @@ public class DoublyLinkedList<AnyType>
         return size;
     }
 
-    // Retourne l'element aï¿½ la fin de la liste.
+    // Retourne l'element a  la fin de la liste.
     // Retourne null si la liste est vide.
     // Complexite asymptotique: O(1)
     public AnyType peekBack()
@@ -71,7 +71,7 @@ public class DoublyLinkedList<AnyType>
     	return front.getValue();
     }
 
-    // Retourne le noeud aï¿½ l'indice donne.
+    // Retourne le noeud a  l'indice donne.
     // Complexite asymptotique: O(n)
     private Node<AnyType> getNodeAt(int index)
     {
@@ -84,7 +84,7 @@ public class DoublyLinkedList<AnyType>
         return temp;
     }
 
-    // Retourne l'element aï¿½ l'indice donne.
+    // Retourne l'element a  l'indice donne.
     // Complexite asymptotique: O(n)
     public AnyType getAt(int index) throws IndexOutOfBoundsException
     {
@@ -100,13 +100,13 @@ public class DoublyLinkedList<AnyType>
         return temp.getValue();
     }
 
-    // Retire l'element aï¿½ la fin de la liste.
+    // Retire l'element a  la fin de la liste.
     // Complexite asymptotique: O(1)
     public void popBack() throws EmptyListException
     {
     	if(empty())
     		throw new EmptyListException("Liste Vide");
-        //Si la taille est 1 alors mettre faire pointer les deux elements vers un nullptr
+        
     	else if(size ==1){
         		size--;
         		back = null;
@@ -138,7 +138,7 @@ public class DoublyLinkedList<AnyType>
     	}
     }
 
-    // Retire l'element aï¿½ l'indice donne.
+    // Retire l'element a  l'indice donne.
     // Complexite asymptotique: O(n)
     public void removeAt(int index) throws IndexOutOfBoundsException
     {
@@ -158,7 +158,7 @@ public class DoublyLinkedList<AnyType>
         size--;
     }
 
-    // Ajoute un element aï¿½ la fin de la liste.
+    // Ajoute un element a  la fin de la liste.
     // Complexite asymptotique: O(1)
     public void pushBack(AnyType item)
     {
@@ -188,7 +188,7 @@ public class DoublyLinkedList<AnyType>
     	size++;
     }
 
-    // Ajoute un element aï¿½ l'indice donne.
+    // Ajoute un element a  l'indice donne.
     // Complexite asymtotique: O(n)
     public void insertAt(AnyType item, int index) throws IndexOutOfBoundsException
     {	

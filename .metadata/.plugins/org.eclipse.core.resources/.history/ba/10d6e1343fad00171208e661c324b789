@@ -33,7 +33,6 @@ public class StackQueue<AnyType> implements Queue<AnyType>
        if(empty())
     	   return null;
        else{
-    	 //Si la pile de sortie est vide alors ajouter des elements de la pile 1 en ordre inverse
     	   if(outStack.isEmpty()){
     		   while (!inStack.isEmpty())
     			   outStack.push(inStack.pop());
@@ -49,7 +48,6 @@ public class StackQueue<AnyType> implements Queue<AnyType>
         if(empty())
         	throw new EmptyQueueException("Liste vide");
         else{
-        	//Si la pile de sortie est vide alors ajouter des elements de la pile 1 en ordre inverse
         	 if(outStack.isEmpty()){
       		   while (!inStack.isEmpty())
       			   outStack.push(inStack.pop());
