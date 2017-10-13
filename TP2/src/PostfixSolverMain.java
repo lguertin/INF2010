@@ -61,20 +61,20 @@ public class PostfixSolverMain
         	switch(token) {
         	case "and":
         		val2 = stack.pop();
-        		val1 = stack.pop();
+        		val1 = stack.pop();		// On prend les deux elements a faire un et
         		result = val1 & val2;
-        		stack.push(result);
+        		stack.push(result);		// On remet le resultat dans le stack
         		break;
         	case "or":
         		val2 = stack.pop();
-        		val1 = stack.pop();
+        		val1 = stack.pop();		// On prend les deux elements a faire un ou
         		result = val1 | val2;
-        		stack.push(result);
+        		stack.push(result);		// On remet le resultat dans le stack
         		break;
         	case "not":
-        		val1 = stack.pop();
+        		val1 = stack.pop();		// On prend l'element a faire un non
         		result = !val1;
-        		stack.push(result);
+        		stack.push(result);		// On remet le resultat dans le stack
         		break;
         	case "1":
         		stack.push(Boolean.TRUE);

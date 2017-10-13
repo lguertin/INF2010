@@ -23,7 +23,7 @@ public class ArrayStack<AnyType>
     		throw new EmptyStackException();
     	
     	AnyType element = table[size-1];
-    	size--;
+    	size--;								// Reduit la taille du tableau
         return element;
     }
 
@@ -33,7 +33,7 @@ public class ArrayStack<AnyType>
     public void push(AnyType element)
     {
         if(size == table.length)
-        	resize(DEFAULT_RESIZE_FACTOR);
+        	resize(DEFAULT_RESIZE_FACTOR);	// Augmente la taille du tableau s'il est plein
         
         table[size] = element;
         size++;
@@ -64,7 +64,7 @@ public class ArrayStack<AnyType>
         AnyType[] tableTemp = (AnyType[])new Object[table.length*resizeFactor];
         
         for(int i = 0; i < this.size; i++){
-        	tableTemp[i] = table[i];
+        	tableTemp[i] = table[i];		//Copie des elements
         }
         
         table = tableTemp;

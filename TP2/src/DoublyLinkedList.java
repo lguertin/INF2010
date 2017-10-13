@@ -106,8 +106,8 @@ public class DoublyLinkedList<AnyType>
     {
     	if(empty())
     		throw new EmptyListException("Liste Vide");
-        //Si la taille est 1 alors mettre faire pointer les deux elements vers un nullptr
-    	else if(size ==1){
+    	
+    	else if(size ==1){	//Si la taille est 1 alors mettre faire pointer les deux elements vers un nullptr
         		size--;
         		back = null;
         		front = null;
@@ -126,7 +126,7 @@ public class DoublyLinkedList<AnyType>
     	if(empty())
     		throw new EmptyListException("Liste vide");
     	
-    	else if(size ==1){
+    	else if(size ==1){	//Si la taille est 1 alors mettre faire pointer les deux elements vers un nullptr
         	size--;
         	back = null;
         	front = null;
