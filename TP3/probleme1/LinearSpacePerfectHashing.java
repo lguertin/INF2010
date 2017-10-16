@@ -32,18 +32,38 @@ public class LinearSpacePerfectHashing<AnyType>
 
 		if(array == null || array.size() == 0)
 		{
-			// A completer
+			data = new QuadraticSpacePerfectHashing[0];
 			return;
 		}
 		if(array.size() == 1)
 		{
 			a = b = 0;
 
-			// A completer
+			data = new QuadraticSpacePerfectHashing[1];
+			data[0].SetArray(array);
 			return;
 		}
-
-		// A completer
+		
+		a = generator.nextInt(p-1) + 1;
+		b = generator.nextInt(p);
+		
+		data = new QuadraticSpacePerfectHashing[array.size()];
+		
+		for(int i = 0; i< array.size();i++){
+			
+			int pos = getKey(array.get(i));
+			ArrayList<AnyType> temp = new ArrayList<AnyType>();
+			temp.add(array.get(i));
+			
+			if(data[pos] != null) {
+				for(int j = 0; j < data[pos].Size(); j++) {
+					if(data[pos].containsKey(j))
+						temp.add(data[pos].items[j]);
+				}
+			}
+			
+			data[pos].SetArray(temp);
+		}
 	}
 
 	public int Size()
@@ -60,25 +80,31 @@ public class LinearSpacePerfectHashing<AnyType>
 
 	public boolean containsKey(int key)
 	{
-		// A completer
+		return (data[key]!= null); 
 
 	}
 	
-	public int getKey (AnyType x) {
-		// A completer
+	public int getKey(AnyType x) {
+		return (((a*x.hashCode() +b)% p)% this.Size());
 		
 	}
 	
 	public boolean containsValue (AnyType x) {
-		// A completer
-
+		if (data[getKey(x)] == null)
+			return false;
+		else
+			return data[getKey(x)].containsValue(x);
 	}
 	
 	public void remove (AnyType x) {
-		// A completer
+		if(containsValue(x)){
+			data[getKey(x)].remove(x);
+		}
+			
+			
+		
 		
 	}
-
 	public String toString () {
 		String result = "";
 		
@@ -89,8 +115,9 @@ public class LinearSpacePerfectHashing<AnyType>
 	}
 
 	public void makeEmpty () {
-		// A completer
-
+		for(QuadraticSpacePerfectHashing<AnyType> listQ : data){
+				listQ.makeEmpty();
+		}
    	}
 	
 }
