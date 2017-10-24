@@ -43,8 +43,9 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	}
 
 	public void remove (AnyType x) {
-		if(items[getKey(x)] != null)
-			items[getKey(x)] = null;
+		if(x!=null)
+			if(items[getKey(x)] != null)
+				items[getKey(x)] = null;
 	}
 
 	public int getKey (AnyType x) {

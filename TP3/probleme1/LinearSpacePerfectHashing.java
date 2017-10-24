@@ -48,7 +48,7 @@ public class LinearSpacePerfectHashing<AnyType>
 		b = generator.nextInt(p);
 		
 		data = new QuadraticSpacePerfectHashing[array.size()];
-		
+		//Create a ...
 		for(int i = 0; i< array.size();i++){
 			
 			int pos = getKey(array.get(i));
@@ -57,12 +57,14 @@ public class LinearSpacePerfectHashing<AnyType>
 			
 			if(data[pos] != null) {
 				for(int j = 0; j < data[pos].Size(); j++) {
-					if(data[pos].containsKey(j))
+					if(data[pos].containsKey(j)){
 						temp.add(data[pos].items[j]);
+					}
 				}
 			}
 			
-			data[pos].SetArray(temp);
+			data[pos] = new QuadraticSpacePerfectHashing<AnyType>(temp);
+
 		}
 	}
 
@@ -85,7 +87,7 @@ public class LinearSpacePerfectHashing<AnyType>
 	}
 	
 	public int getKey(AnyType x) {
-		return (((a*x.hashCode() +b)% p)% this.Size());
+		return (((a*x.hashCode() +b)% p)% data.length);
 		
 	}
 	
@@ -107,7 +109,10 @@ public class LinearSpacePerfectHashing<AnyType>
 	}
 	public String toString () {
 		String result = "";
-		
+		for(int i = 0 ; i< data.length;i++){
+			if(data[i]!= null)
+				result+="Cle "+ i + " : "+ data[i].toString()+ "\n";
+		}
 		// A completer
 		
 		
