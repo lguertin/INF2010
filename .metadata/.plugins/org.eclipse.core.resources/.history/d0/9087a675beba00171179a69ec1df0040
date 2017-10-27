@@ -124,7 +124,7 @@ public class DoubleHashingTable<AnyType> {
 		return this.currentSize;
 	}
 	/**
-	 * Methode de rehashage de notre tableau. Alloue un nouveau tableau plus grand
+	 * Methode de rehashage de notre tableau 
 	 */
 	private void rehash() {
 		HashEntry<AnyType>[] oldArray = this.array;
@@ -138,20 +138,14 @@ public class DoubleHashingTable<AnyType> {
 			if (oldArray[key] != null && oldArray[key].isActive)
 				insert(oldArray[key].element);
 	}
-	/**
-	 * Methode  qui determine le prochain entier premier
-	 * @param n : Valeur a partir de laquelle on doit trouver le prochain entier
-	 */
+
 	private static int nextPrime(int n) {
 		if (n <= 0) n = 3;
 		if (n % 2 == 0) n++;
 		for (; !isPrime(n); n += 2);
 		return n;
 	}
-	/**
-	 * Methode qui determine si un entier est premier
-	 * @param n : Valeur qui va etre tester
-	 */
+
 	private static boolean isPrime(int n) {
 		if (n == 1 || n == 2 || n == 3 || n % 2 == 0) return true;
 		for (int i = 3; i * i <= n; i += 2)

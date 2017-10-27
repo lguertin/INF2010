@@ -5,16 +5,11 @@ public class DoubleHashingTable<AnyType> {
 	private HashEntry<AnyType>[] array;
 	private int currentSize;
 	private int R;
-	/**
-	 * Constructeur par defaut
-	 */
+
 	public DoubleHashingTable() {
 		this(DEFAULT_TABLE_SIZE);
 	}
-	/**
-	 * Constructeur par parametre
-	 * @param size : taille du tableau a alouer
-	 */
+
 	public DoubleHashingTable(int size) {
 		R = 3;
 		allocateArray(size);
@@ -45,10 +40,7 @@ public class DoubleHashingTable<AnyType> {
 		for (int i = 0; i < array.length; i++)
 			array[i] = null;
 	}
-	/**
-	 * Methode qui permet de savoir si l'element a une case est actif
-	 * @param currentPos : indice de l'element qui va etre verifie
-	 */
+
 	private boolean isActive(int currentPos) {
 		if(array[currentPos] == null)
 			return false;
@@ -101,10 +93,7 @@ public class DoubleHashingTable<AnyType> {
 		if (this.isActive(key))
 			this.array[key].isActive = false;
 	}
-	/**
-	 * Insere un element dans notre tableau
-	 * @param element : element qui doit etre inserer dans le tableau 
-	 */
+
 	public void insert(AnyType element) {
 		int key = this.getKey(element);
 
@@ -117,15 +106,11 @@ public class DoubleHashingTable<AnyType> {
 		if (this.currentSize > this.array.length / 2)
 			rehash();
 	}
-	/**
-	 * Methode qui retourne le nombre d'element dans le tableau
-	 */
+
 	public int nbElement() {
 		return this.currentSize;
 	}
-	/**
-	 * Methode de rehashage de notre tableau. Alloue un nouveau tableau plus grand
-	 */
+
 	private void rehash() {
 		HashEntry<AnyType>[] oldArray = this.array;
 		R = this.array.length;
@@ -138,20 +123,14 @@ public class DoubleHashingTable<AnyType> {
 			if (oldArray[key] != null && oldArray[key].isActive)
 				insert(oldArray[key].element);
 	}
-	/**
-	 * Methode  qui determine le prochain entier premier
-	 * @param n : Valeur a partir de laquelle on doit trouver le prochain entier
-	 */
+
 	private static int nextPrime(int n) {
 		if (n <= 0) n = 3;
 		if (n % 2 == 0) n++;
 		for (; !isPrime(n); n += 2);
 		return n;
 	}
-	/**
-	 * Methode qui determine si un entier est premier
-	 * @param n : Valeur qui va etre tester
-	 */
+
 	private static boolean isPrime(int n) {
 		if (n == 1 || n == 2 || n == 3 || n % 2 == 0) return true;
 		for (int i = 3; i * i <= n; i += 2)

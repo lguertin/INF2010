@@ -148,10 +148,7 @@ public class DoubleHashingTable<AnyType> {
 		for (; !isPrime(n); n += 2);
 		return n;
 	}
-	/**
-	 * Methode qui determine si un entier est premier
-	 * @param n : Valeur qui va etre tester
-	 */
+
 	private static boolean isPrime(int n) {
 		if (n == 1 || n == 2 || n == 3 || n % 2 == 0) return true;
 		for (int i = 3; i * i <= n; i += 2)
