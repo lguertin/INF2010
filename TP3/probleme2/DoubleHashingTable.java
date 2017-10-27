@@ -25,14 +25,14 @@ public class DoubleHashingTable<AnyType> {
 		}
 
 		public HashEntry(AnyType element, boolean active) {
-			element = element;
-			isActive = active;
+			this.element = element;
+			this.isActive = active;
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void allocateArray(int arraySize) {
-		array = (HashEntry<AnyType>[]) new Object[arraySize];
+	private void allocateArray(int size) {
+		array = new HashEntry[size];
 	}
 
 	public void makeEmpty() {
@@ -42,7 +42,10 @@ public class DoubleHashingTable<AnyType> {
 	}
 
 	private boolean isActive(int currentPos) {
-		return (array[currentPos].isActive && array[currentPos] != null);
+		if(array[currentPos] == null)
+			return false;
+		else
+			return array[currentPos].isActive;
 	}
 
 	private int myHash(AnyType element) {
@@ -57,12 +60,12 @@ public class DoubleHashingTable<AnyType> {
 	private int getKey(AnyType x) {
 		int offset = 0;
 		int currentPos = myHash(x);
-		int n = array.length;
+		int N = array.length;
 
-		while (array[currentPos] != null && !array[currentPos].element.equals(x)) {
+		while (this.array[currentPos] != null && !this.array[currentPos].element.equals(x)) {
 			int H1 = myHash(x);
 			int H2 = (R - (x.hashCode() % R));
-			currentPos = (H1 + offset * H2) % n;
+			currentPos = (H1 + offset * H2) % N;
 			offset++;
 		}
 
