@@ -5,6 +5,7 @@ public class DoubleHashingTable<AnyType> {
 	private HashEntry<AnyType>[] array;
 	private int currentSize;
 	private int R;
+	
 	/**
 	 * Constructeur par defaut
 	 */
@@ -13,7 +14,7 @@ public class DoubleHashingTable<AnyType> {
 	}
 	/**
 	 * Constructeur par parametre
-	 * @param size : taille du tableau a alouer
+	 * @param size : taille du tableau a allouer
 	 */
 	public DoubleHashingTable(int size) {
 		R = 3;
@@ -35,16 +36,24 @@ public class DoubleHashingTable<AnyType> {
 		}
 	}
 	
+	/**
+	 * Methode qui permet d'allouer de l'espace au array
+	 * @param size : la taille du tableau a allouer
+	 */
 	@SuppressWarnings("unchecked")
 	private void allocateArray(int size) {
 		array = new HashEntry[size];
 	}
-
+	
+	/**
+	 * Methode qui permet de vider le array en affectant tous les elements a null
+	 */
 	public void makeEmpty() {
 		currentSize = 0;
 		for (int i = 0; i < array.length; i++)
 			array[i] = null;
 	}
+	
 	/**
 	 * Methode qui permet de savoir si l'element a une case est actif
 	 * @param currentPos : indice de l'element qui va etre verifie
@@ -56,30 +65,45 @@ public class DoubleHashingTable<AnyType> {
 			return array[currentPos].isActive;
 	}
 
-	private int myHash(AnyType element) {
-		int x = element.hashCode();
-		x %= array.length;
+	/**
+	 * Methode qui permet d'obtenir la valeur du hash d'un element (H1 dans la formule)
+	 * @param x : l'element a hasher
+	 * @return : La valeur du hash de l'element
+	 */
+	private int myHash(AnyType x) {
+		int hashVal = x.hashCode();
+		hashVal %= array.length;
 		
-		if(x < 0)
-			x += array.length;
-		return x;
+		if(hashVal < 0)
+			hashVal += array.length;
+		return hashVal;
 	}
 
+	/**
+	 * Methode qui permet d'obtenir la cle du hashing de l'element
+	 * @param x : l'element a hasher
+	 * @return : position valide de la cle pour l'element x
+	 */
 	private int getKey(AnyType x) {
 		int offset = 0;
-		int currentPos = myHash(x);
+		int pos = myHash(x);
 		int N = array.length;
 
-		while (this.array[currentPos] != null && !this.array[currentPos].element.equals(x)) {
+		while (this.array[pos] != null && !this.array[pos].element.equals(x)) {
 			int H1 = myHash(x);
 			int H2 = (R - (x.hashCode() % R));
-			currentPos = (H1 + offset * H2) % N;
+			pos = (H1 + offset * H2) % N;
 			offset++;
 		}
 
-		return currentPos;
+		return pos;
 	}
 
+	/**
+	 * Methode pour avoir un element
+	 * @param x : element a aller chercher
+	 * @return : l'element trouve
+	 */
 	public AnyType get(AnyType x) {
 		int pos = getKey(x);
 
@@ -88,33 +112,30 @@ public class DoubleHashingTable<AnyType> {
 
 		return null;
 	}
+	
+	/**
+	 * Methode qui enleve un element du tableau s'il est actif en le desactivant
+	 * @param x : Element a retirer
+	 */
+	public void remove(AnyType x) {
+		int pos = this.getKey(x);
 
-	public AnyType getElementAtKey(int key) {
-		if (this.array[key] != null && this.array[key].isActive)
-			return this.array[key].element;
-		return null;
-	}
-
-	public void remove(AnyType element) {
-		int key = this.getKey(element);
-
-		if (this.isActive(key))
-			this.array[key].isActive = false;
+		if (this.isActive(pos))
+			this.array[pos].isActive = false;
 	}
 	/**
 	 * Insere un element dans notre tableau
 	 * @param element : element qui doit etre inserer dans le tableau 
 	 */
-	public void insert(AnyType element) {
-		int key = this.getKey(element);
+	public void insert(AnyType x) {
+		int pos = getKey(x);
 
-		if (isActive(key))
+		if (isActive(pos))
 			return;
 
-		this.array[key] = new HashEntry<AnyType>(element, true);
-		this.currentSize++;
+		array[pos] = new HashEntry<AnyType>(x, true);
 
-		if (this.currentSize > this.array.length / 2)
+		if (++currentSize > array.length/2)
 			rehash();
 	}
 	/**
@@ -123,20 +144,20 @@ public class DoubleHashingTable<AnyType> {
 	public int nbElement() {
 		return this.currentSize;
 	}
+	
 	/**
 	 * Methode de rehashage de notre tableau. Alloue un nouveau tableau plus grand
 	 */
 	private void rehash() {
-		HashEntry<AnyType>[] oldArray = this.array;
-		R = this.array.length;
+		HashEntry<AnyType>[] oldArray = array;
+		R = array.length;
+		
+		allocateArray(nextPrime(oldArray.length*2));
+		currentSize = 0;
 
-		int nextPrime = nextPrime(2 * oldArray.length);
-		allocateArray(nextPrime);
-		this.currentSize = 0;
-
-		for (int key = 0; key < oldArray.length; key++)
-			if (oldArray[key] != null && oldArray[key].isActive)
-				insert(oldArray[key].element);
+		for (int pos = 0; pos < oldArray.length; pos++)
+			if (oldArray[pos] != null && oldArray[pos].isActive)
+				insert(oldArray[pos].element);
 	}
 	/**
 	 * Methode  qui determine le prochain entier premier
@@ -158,5 +179,15 @@ public class DoubleHashingTable<AnyType> {
 			if (n % i == 0)
 				return false;
 		return true;
+	}
+	/**
+	 * Methode qui permet d'aller chercher un element a partir d'une cle
+	 * @param key : cle a laquelle nous voulons avoir un objet
+	 * @return : retourne l'objet a la cle
+	 */
+	public AnyType getElementFromKey(int key) {
+		if(key > 0 && key < currentSize && array[key].element != null && array[key].isActive)
+			return array[key].element;
+		return null;
 	}
 }

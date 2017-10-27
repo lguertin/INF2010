@@ -25,6 +25,15 @@ public class MyHashMap<KeyType, ValueType>
       return ( items.nbElement() == 0 ); 
    }
 
+   public int nbreOccurence(ValueType x) {
+	   int nbreOcc = 0;
+	   for(int i = 0; i < items.nbElement(); i++) {
+		   if(items.getElementFromKey(i) != null && items.getElementFromKey(i).value == x)
+			   nbreOcc++;
+	   }
+	   return nbreOcc;
+   }
+   
    private static class Entry<KeyType,ValueType>
    {
       public KeyType key;
