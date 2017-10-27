@@ -108,7 +108,17 @@ public class HashFunctions
     */
    public static ArrayList<Integer> randomIntegers(int length)
    {
-      return null;
+	   ArrayList<Integer> array = new ArrayList<>(length);
+	   Random generator = new Random(System.nanoTime());
+	   int i = 0;
+	   while(i < length) {
+		   int number = generator.nextInt(LinearSpacePerfectHashing.p);
+		   if(!array.contains(number)) {
+			   array.add(i, number);
+			   i++;
+		   }
+	   }
+	   return array;
    }
 }
 
