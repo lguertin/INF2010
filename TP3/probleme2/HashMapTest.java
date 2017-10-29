@@ -13,7 +13,6 @@ public class HashMapTest
       
       System.out.println( mhmap.get(25) );
       System.out.println( mhmap.get(10) );
-      System.out.println( mhmap.nbreOccurence("chou-rave"));
    }
 
 }
