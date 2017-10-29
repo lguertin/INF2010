@@ -186,8 +186,8 @@ public class DoubleHashingTable<AnyType> {
 	 * @return : retourne l'objet a la cle
 	 */
 	public AnyType getElementFromKey(int key) {
-		if(key > 0 && key < currentSize && array[key].element != null && array[key].isActive)
-			return array[key].element;
+		if(array[key] != null && array[key].isActive)
+				return array[key].element;
 		return null;
 	}
 }

@@ -27,9 +27,17 @@ public class MyHashMap<KeyType, ValueType>
 
    public int nbreOccurence(ValueType x) {
 	   int nbreOcc = 0;
-	   for(int i = 0; i < items.nbElement(); i++) {
-		   if(items.getElementFromKey(i) != null && items.getElementFromKey(i).value == x)
-			   nbreOcc++;
+	   int nbElements = 0;
+	   int i = 0;
+	   Entry<KeyType,ValueType> elem = null;
+	   while(nbElements < items.nbElement()) {
+		   elem = items.getElementFromKey(i);
+		   if(elem != null) {
+			   if(elem.value == x)
+				   nbreOcc++;
+			   nbElements++;
+		   }
+		   i++;
 	   }
 	   return nbreOcc;
    }
