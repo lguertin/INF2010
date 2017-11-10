@@ -24,9 +24,9 @@ public class BST<T extends Comparable<T>>
 
     private boolean isValid(Node<T> node)
     {
-        if (node == null) {
+        if (node == null)
             return true;
-        }
+
         boolean isLeftValid = node.left == null || node.left.val.compareTo(node.val) < 0 && isValid(node.left);
         boolean isRightValid = node.right == null || node.right.val.compareTo(node.val) > 0 && isValid(node.right);
         return isLeftValid && isRightValid;

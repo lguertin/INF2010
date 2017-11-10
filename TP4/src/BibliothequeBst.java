@@ -7,14 +7,16 @@ public class BibliothequeBst implements IBibliotheque
     private BST<String> livres = new AvlTree<String>();
 
     // Complexité: O(log(n))
-    // Explication:
+    // Explication: L'ajout dans un arbre binaire de recherche est toujours en log(n) lors qu'il est balance
+    //				Il ne doit pas tout parcourir les elements, mais que log(n) elements	
     public void ajouterLivre(String livre)
     {
     	livres.insert(livre);
     }
 
     // Complexité: O(log(n))
-    // Explication:
+    // Explication: La recherche dans un arbre binaire de recherche est toujours en log(n) lorsqu'il est balance
+    //				Il ne doit pas tout parcourir les elements, mais que log(n) elements	
     public boolean contientLivre(String livre)
     {
     	return livres.contains(livre);

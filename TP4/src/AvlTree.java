@@ -56,7 +56,7 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
     	node.right = node2.left;
     	node2.left = node;
 
-    	return node;
+    	return node2;
     }
 
     private Node<T> balanceRightLeft(Node<T> node)
@@ -72,7 +72,7 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
     	node.left = node2.right;
     	node2.right = node;
 
-    	return node;
+    	return node2;
     }
 
     private Node<T> balanceLeftRight(Node<T> node)
