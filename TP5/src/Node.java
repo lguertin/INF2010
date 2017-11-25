@@ -1,9 +1,6 @@
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-
-import BST.Node;
+import java.util.Collections;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -83,27 +80,25 @@ public class Node {
     }
 
     private void moveUp() {
-    	if(parent != null) {
-    		if(parent.parent != null) { // Gere le grand parent s il existe
-    			parent.parent.addEnfant(this);
-    			parent.parent.removeEnfant(parent);
-    		}
-    		parent.removeEnfant(this);
-    		ArrayList<Node> lesEnfantsDuParent = parent.enfants;
-    		parent.enfants = enfants;
-    		enfants = lesEnfantsDuParent;
-    		enfants.add(parent);
-    		
-    		for(Node node : parent.enfants) // Gere les parents des enfants du Node this
-    			node.parent = parent;
+    	Node tmpParent = parent;
+    	Node grandParent = tmpParent.parent;
+		if(tmpParent.parent != null) { // Gere le grand parent s il existe
+			tmpParent.parent.addEnfant(this);
+			grandParent.removeEnfant(tmpParent);
+		}
+		tmpParent.parent = this;
+		this.parent = grandParent;
+		tmpParent.removeEnfant(this);
+		ArrayList<Node> lesEnfantsDuParent = tmpParent.enfants;
+		tmpParent.enfants = enfants;
+		enfants = lesEnfantsDuParent;
+		enfants.add(tmpParent);
+		
+		for(Node node : tmpParent.enfants) // Gere les parents des enfants du Node this
+			node.parent = tmpParent;
 
-    		parent.ordre++;
-    		ordre--;
-    		
-    		Node grandParent = parent.parent;
-    		parent.parent = this;
-    		parent = grandParent;
-    	}
+		tmpParent.ordre++;
+		ordre--;
     }
 
     private void reduceOrderFromDelete(Node node){
@@ -138,9 +133,9 @@ public class Node {
     
     public Node findValue(int valeur) {
     	Node temp = null;
-    	if(this.valeur == valeur)
-    		return this;
         for(Node node: enfants){
+        	if(node.valeur == valeur)
+        		return node;
         	if(node.valeur < valeur) {
         		temp = node.findValue(valeur);
         		if(temp != null)
@@ -151,8 +146,19 @@ public class Node {
     }
     
     public ArrayList<Integer> getElementsSorted() {
-    	// à compléter
+    	if (enfants.size() == 0)
+    		return null;
     	
-    	return null;
+    	ArrayList<Integer> arr = new ArrayList<Integer>();
+    	getElementsSortedRec(arr);
+    	Collections.sort(arr);
+    	return arr;
+    }
+    
+    private void getElementsSortedRec(ArrayList<Integer> arr) {
+    	for(Node node : enfants){
+    		arr.add(node.valeur);
+    		node.getElementsSortedRec(arr);
+    	}
     }
 }
