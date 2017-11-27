@@ -25,6 +25,15 @@ public class CodeBase {
     // des dépendances circulaires dans les fichiers source.
     private boolean existsCircularDependencies(SourceFile file, HashSet<SourceFile> dependentFiles)
     {
-        // À compléter
+    	dependentFiles.add(file);
+    	for(SourceFile files : file.getDependencies()) {
+    		if (!dependentFiles.contains(files)) {
+    			if(existsCircularDependencies(files, dependentFiles))
+    				return true;
+    		}
+    		else
+    			return true;
+    	}
+    	return false;
     }
 }
